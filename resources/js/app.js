@@ -9,6 +9,16 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 /**
+ * vform
+ */
+
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form;
+
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
@@ -20,6 +30,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('account', require('./components/auth/Account').default);
 Vue.component('admin', require('./components/Admin').default);
 Vue.component('dashboard', require('./components/pages/Dashboard').default);
 Vue.component('users', require('./components/pages/Users').default);
