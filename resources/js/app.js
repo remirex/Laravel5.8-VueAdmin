@@ -19,6 +19,28 @@ Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 
 /**
+ * Vue router
+ */
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+let routes = [
+    { path: '/dashboard', component: require('./components/pages/Dashboard').default },
+    { path: '/users', component: require('./components/pages/Users').default },
+    { path: '/role', component: require('./components/pages/Roles').default },
+    { path: '/permission', component: require('./components/pages/Permissions').default },
+]
+
+// Create the router instance and pass the `routes` option
+const router = new VueRouter({
+    mode: 'history',
+    routes // short for `routes: routes`
+})
+
+/**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
@@ -45,4 +67,5 @@ Vue.component('permissions', require('./components/pages/Permissions').default);
 
 const app = new Vue({
     el: '#app',
+    router
 });

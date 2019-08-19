@@ -7,8 +7,10 @@ window._ = require('lodash');
  */
 
 try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
+   /* window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');*/
+    global.Popper = require('popper.js').default;
+    global.$ = global.jQuery = require('jquery');
 
     require('bootstrap');
     require('admin-lte');

@@ -28,33 +28,13 @@ textarea:focus, input:focus{
   color: $green;
   font-size: 30px;
 }
-.form-control:active,
-.form-control:focus,
-.form-control:focus:active {
-  background-color: transparent!important;
-  border: none;
-  border-bottom: 1px solid white;
-  color: white;
-  outline: none;
+
+.form input.form-control {
+  border-radius: 50px!important;
+  padding: 12px!important;
 }
-input.form-control {
-  font-family: "Roboto", sans-serif;
-  outline: none!important;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid white;
-  margin: 0 0 15px;
-  padding: 15px!important;
-  box-sizing: border-box;
-  font-size: 14px;
-  height: auto;
-  background: none;
-  color: white;
-}
-input.form-control::placeholder {
-  color: white;
-}
-input.form-control.is-invalid {
+
+.form.input.form-control.is-invalid {
   border-bottom: 1px solid #e3342f;
   margin-bottom: auto;
 }
