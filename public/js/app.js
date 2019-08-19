@@ -1998,7 +1998,7 @@ __webpack_require__.r(__webpack_exports__);
     userLogin: function userLogin() {
       this.login.post('/login').then(function (response) {
         if (response.data === 'admin') {
-          window.location.href = '/admin';
+          window.location.href = '/dashboard';
         } else {
           window.location.href = '/home';
         }
@@ -54355,6 +54355,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.component(vform__WEBPACK_IMPORTED_MOD
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var routes = [{
   path: '/dashboard',
+  name: 'dashboard',
   component: __webpack_require__(/*! ./components/pages/Dashboard */ "./resources/js/components/pages/Dashboard.vue")["default"]
 }, {
   path: '/users',
@@ -54966,8 +54967,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/laravel5.8-VueAdmin/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/laravel5.8-VueAdmin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/VueAdmin/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/VueAdmin/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

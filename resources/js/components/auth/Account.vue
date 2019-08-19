@@ -91,7 +91,7 @@
                 this.login.post('/login')
                     .then(response => {
                         if(response.data === 'admin'){
-                            window.location.href = '/admin'
+                            window.location.href = '/dashboard'
                         } else {
                             window.location.href = '/home'
                         }

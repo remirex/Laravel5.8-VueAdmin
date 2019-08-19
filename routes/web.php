@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/account-request', function () {
     return view('auth.account');
-});
+})->name('account-request');
 
 Auth::routes();
 

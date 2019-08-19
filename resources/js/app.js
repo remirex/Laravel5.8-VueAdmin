@@ -28,7 +28,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 let routes = [
-    { path: '/dashboard', component: require('./components/pages/Dashboard').default },
+    { path: '/dashboard', name: 'dashboard', component: require('./components/pages/Dashboard').default },
     { path: '/users', component: require('./components/pages/Users').default },
     { path: '/role', component: require('./components/pages/Roles').default },
     { path: '/permission', component: require('./components/pages/Permissions').default },
