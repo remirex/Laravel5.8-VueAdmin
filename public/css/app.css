@@ -5926,3 +5926,17 @@ div.help-block.invalid-feedback {
   display: none;
 }
 
+.edit {
+  color: #f6993f;
+  cursor: pointer;
+}
+
+.delete {
+  color: #e3342f;
+  cursor: pointer;
+}
+
+.fas.fa-sync-alt {
+  cursor: pointer;
+}
+
