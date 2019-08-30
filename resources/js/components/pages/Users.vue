@@ -28,14 +28,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="user in users.data" :key="user.id">
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
-                        <td><label class="badge badge-success mr-1" v-for="rv in user.roles">{{rv.name}}</label></td>
-                        <td><label class="badge badge-success mr-1" v-for="pv in user.permissions">{{pv.name}}</label></td>
+                        <td><label class="badge badge-success mr-1" v-for="rv in user.role">{{rv.name}}</label></td>
+                        <td><label class="badge badge-success mr-1" v-for="pv in user.permission">{{pv.name}}</label></td>
                         <td>
-                            <i class="fas fa-user-edit edit" data-toggle="modal" v-bind:data-target="'#editUser'+user.id" @click="fillUserDetails(user)"></i>&nbsp; |&nbsp; <i class="fas fa-user-minus delete"></i>
+                            <i class="fas fa-user-edit edit" data-toggle="modal" v-bind:data-target="'#editUser'+user.id" @click="fillUserDetails(user)"></i>&nbsp; |&nbsp;
+                            <i class="fas fa-user-minus delete"></i>
                             <!-- Modal edit user -->
                             <div class="modal fade" :id="'editUser'+user.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -52,6 +53,36 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" name="email" class="form-control" placeholder="Email" v-model="userForm.email">
+                                            </div>
+                                            <div class="form-group">
+                                                <multiselect
+                                                        v-model="userForm.role"
+                                                        :options="roles"
+                                                        label="name"
+                                                        track-by="id"
+                                                        :searchable="false"
+                                                        :multiple="true"
+                                                        :taggable="true"
+                                                        :close-on-select="false"
+                                                        :clear-on-select="false"
+                                                        placeholder="Select role"
+                                                        @tag="addTag">
+                                                </multiselect>
+                                            </div>
+                                            <div class="form-group">
+                                                <multiselect
+                                                        v-model="userForm.permission"
+                                                        :options="permissions"
+                                                        label="name"
+                                                        track-by="id"
+                                                        :searchable="false"
+                                                        :multiple="true"
+                                                        :taggable="true"
+                                                        :close-on-select="false"
+                                                        :clear-on-select="false"
+                                                        placeholder="Select permission"
+                                                        @tag="addTag">
+                                                </multiselect>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -93,6 +124,37 @@
                         <div class="form-group">
                             <input type="password" name="password_confirmation" class="form-control" placeholder="Password Confirm">
                         </div>
+                        <div class="form-group">
+                            <multiselect
+                                    v-model="userForm.role"
+                                    :options="roles"
+                                    label="name"
+                                    track-by="id"
+                                    :searchable="false"
+                                    :multiple="true"
+                                    :taggable="true"
+                                    :close-on-select="false"
+                                    :clear-on-select="false"
+                                    placeholder="Select role"
+                                    @tag="addTag">
+                            </multiselect>
+                        </div>
+                        <div class="form-group">
+                            <multiselect
+                                    v-model="userForm.permission"
+                                    :options="permissions"
+                                    label="name"
+                                    track-by="id"
+                                    :searchable="false"
+                                    :multiple="true"
+                                    :taggable="true"
+                                    :close-on-select="false"
+                                    :clear-on-select="false"
+                                    placeholder="Select permission"
+                                    @tag="addTag"
+                            >
+                            </multiselect>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -105,20 +167,34 @@
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect';
     export default {
+        components: {
+            Multiselect
+        },
         data() {
           return {
+              roles: [],
+              permissions: [],
               users: {},
               userForm: new Form({
                   name: '',
                   email: '',
                   password: '',
-                  roles: [],
-                  permissions: []
+                  role: [],
+                  permission: []
               })
           }
         },
         methods: {
+            addTag (newTag) {
+                const tag = {
+                    name: newTag
+                }
+                this.options.push(tag)
+                this.role.push(tag)
+                this.permission.push(tag)
+            },
             getUsers() {
                 axios.get('admin/users')
                     .then(response => {
@@ -130,11 +206,40 @@
 
             },
             fillUserDetails(user) {
-                this.userForm.fill(user);
+                //this.userForm.fill(user);
+                this.userForm = Object.assign({}, user);
+            },
+            loadRoles() {
+                axios.get('admin/roles')
+                    .then(response => {
+                        this.roles = response.data
+                    })
+                    .catch()
+            },
+            loadPermissions() {
+                axios.get('admin/permissions')
+                    .then(response => {
+                        this.permissions = response.data
+                    })
+                    .catch()
             }
         },
         created() {
             this.getUsers();
+            this.loadRoles();
+            this.loadPermissions();
+        },
+        computed: {
+            rolesArray() {
+                return _.map(this.roles, function (num, key) {
+                    return num.name;
+                })
+            },
+            permissionsArray() {
+                return _.map(this.permissions, function (num, key) {
+                    return num.name;
+                })
+            }
         },
         name: "Users"
     }

@@ -9,6 +9,14 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 /**
+ * vue-select
+ */
+
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
+/**
  * vform
  */
 
