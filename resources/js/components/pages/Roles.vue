@@ -26,7 +26,15 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    <tr v-for="role in roles" :key="role.id">
+                        <td>{{role.id}}</td>
+                        <td>{{role.name}}</td>
+                        <td><label class="badge badge-success mr-1" v-for="pv in role.permissions">{{pv.name}}</label></td>
+                        <td>
+                            <i class="fas fa-user-edit edit"></i>&nbsp; |&nbsp;
+                            <i class="fas fa-user-minus delete"></i>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -34,12 +42,12 @@
         </div>
         <!-- /.card -->
 
-        <!-- Modal add new user -->
+        <!-- Modal add new role -->
         <div class="modal fade" id="addNewUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel2">New User</h5>
+                        <h5 class="modal-title" id="exampleModalLabel2">New Role</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -49,23 +57,8 @@
                             <input type="text" name="name" class="form-control" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <!--<multiselect
-                                    v-model="userForm.role"
-                                    :options="roles"
-                                    label="name"
-                                    track-by="id"
-                                    :searchable="false"
-                                    :multiple="true"
-                                    :taggable="true"
-                                    :close-on-select="false"
-                                    :clear-on-select="false"
-                                    placeholder="Select role"
-                                    @tag="addTag">
-                            </multiselect>-->
-                        </div>
-                        <div class="form-group">
-                            <!--<multiselect
-                                    v-model="userForm.permission"
+                            <multiselect
+                                    v-model="roleForm.permission"
                                     :options="permissions"
                                     label="name"
                                     track-by="id"
@@ -77,7 +70,7 @@
                                     placeholder="Select permission"
                                     @tag="addTag"
                             >
-                            </multiselect>-->
+                            </multiselect>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -91,7 +84,49 @@
 </template>
 
 <script>
+    import Multiselect from 'vue-multiselect';
     export default {
+        components: {
+            Multiselect
+        },
+        data() {
+          return {
+              roles: {},
+              permissions: [],
+              roleForm: new Form({
+                  name: '',
+                  permission: ''
+              })
+          }
+        },
+        methods: {
+            addTag (newTag) {
+                const tag = {
+                    name: newTag
+                }
+                this.options.push(tag)
+                this.role.push(tag)
+                this.permission.push(tag)
+            },
+            loadRoles() {
+                axios.get('admin/roles')
+                    .then(response => {
+                        this.roles = response.data.data
+                    })
+                    .catch()
+            },
+            loadPermissions() {
+                axios.get('admin/permissions')
+                    .then(response => {
+                        this.permissions = response.data.data
+                    })
+                    .catch()
+            }
+        },
+        created() {
+            this.loadPermissions();
+            this.loadRoles();
+        },
         name: "Roles"
     }
 </script>

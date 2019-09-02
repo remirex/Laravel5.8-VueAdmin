@@ -212,14 +212,14 @@
             loadRoles() {
                 axios.get('admin/roles')
                     .then(response => {
-                        this.roles = response.data
+                        this.roles = response.data.data
                     })
                     .catch()
             },
             loadPermissions() {
                 axios.get('admin/permissions')
                     .then(response => {
-                        this.permissions = response.data
+                        this.permissions = response.data.data
                     })
                     .catch()
             }
