@@ -6300,3 +6300,19 @@ div.help-block.invalid-feedback {
   cursor: pointer;
 }
 
+.admin-pag .pagination {
+  float: right;
+}
+
+.admin-pag .page-item .page-link {
+  color: #4d4d4f;
+  background-color: #fff;
+}
+
+.admin-pag .page-item.active .page-link {
+  background-color: #4d4d4f;
+  color: #fff;
+  border-color: #4d4d4f;
+  z-index: 1;
+}
+

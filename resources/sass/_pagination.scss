@@ -1,0 +1,13 @@
+.admin-pag .pagination {
+  float: right;
+}
+.admin-pag .page-item .page-link {
+  color: $main-grey;
+  background-color: $white;
+}
+.admin-pag .page-item.active .page-link {
+  background-color: $main-grey;
+  color: $white;
+  border-color: $main-grey;
+  z-index: 1;
+}

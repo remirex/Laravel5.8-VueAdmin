@@ -17,25 +17,24 @@ class RolesAndPermissionsSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
 
-        Role::create(['name' => 'user']);
-        Permission::create(['name' => 'view']);
-        /** @var \App\User $user */
-        $user = factory(\App\User::class)->create();
-
-        $user->assignRole('user');
-        $user->givePermissionTo('view');
-
         Role::create(['name' => 'admin']);
-        Role::create(['name' => 'moderator']);
-        Permission::create(['name' => 'create']);
-
         /** @var \App\User $user */
         $admin = factory(\App\User::class)->create([
+            'name' => 'Admin Admin',
+            'email' => 'admin@example.com',
+        ]);
+
+        $admin->assignRole('admin');
+
+        Role::create(['name' => 'guest']);
+
+        /** @var \App\User $user */
+        $user = factory(\App\User::class)->create([
             'name' => 'John Doe',
             'email' => 'john@example.com',
         ]);
 
-        $admin->assignRole(['admin', 'moderator']);
-        $user->givePermissionTo('create');
+        $user->assignRole('guest');
+
     }
 }

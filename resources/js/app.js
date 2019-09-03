@@ -27,6 +27,25 @@ Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
 
 /**
+ * SweetAlert2
+ */
+import swal from 'sweetalert2'
+window.swal = swal;
+
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
+
+/**
+ * laravel-vue-pagination
+ */
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+/**
  * Vue router
  */
 
