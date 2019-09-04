@@ -5,11 +5,11 @@
                 <h3 class="card-title">Users | <button class="btn btn-default" data-toggle="modal" data-target="#addNewUser">Add new <i class="fas fa-user-plus"></i></button></h3>
 
                 <div class="card-tools d-flex">
-                    <i class="fas fa-sync-alt p-2"></i>
+                    <i class="fas fa-sync-alt p-2" @click="resetSearch"></i>
                     <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search" @keyup="searchit" v-model="search">
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-default"><i class="fas fa-search"></i></button>
                         </div>
                     </div>
                 </div>
@@ -187,6 +187,7 @@
         },
         data() {
           return {
+              search: '',
               roles: [],
               permissions: [],
               users: {},
@@ -301,9 +302,23 @@
                         this.permissions = response.data.data
                     })
                     .catch()
+            },
+            searchit() {
+                fire.$emit('searching');
+            },
+            resetSearch() {
+                this.loadUsers();
             }
         },
         created() {
+            fire.$on('searching', () => {
+                let query = this.search;
+                axios.get('admin/findUser?q=' + query)
+                    .then(response => {
+                        this.users = response.data
+                    })
+                    .catch()
+            });
             this.loadUsers();
             this.loadRoles();
             this.loadPermissions();

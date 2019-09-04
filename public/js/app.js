@@ -2534,6 +2534,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      search: '',
       roles: [],
       permissions: [],
       users: {},
@@ -2643,9 +2644,23 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('admin/permissions').then(function (response) {
         _this6.permissions = response.data.data;
       })["catch"]();
+    },
+    searchit: function searchit() {
+      fire.$emit('searching');
+    },
+    resetSearch: function resetSearch() {
+      this.loadUsers();
     }
   },
   created: function created() {
+    var _this7 = this;
+
+    fire.$on('searching', function () {
+      var query = _this7.search;
+      axios.get('admin/findUser?q=' + query).then(function (response) {
+        _this7.users = response.data;
+      })["catch"]();
+    });
     this.loadUsers();
     this.loadRoles();
     this.loadPermissions();
@@ -44556,11 +44571,58 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-md-12" }, [
     _c("div", { staticClass: "card" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "card-header" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-tools d-flex" }, [
+          _c("i", {
+            staticClass: "fas fa-sync-alt p-2",
+            on: { click: _vm.resetSearch }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "input-group input-group-sm",
+              staticStyle: { width: "150px" }
+            },
+            [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control float-right",
+                attrs: {
+                  type: "text",
+                  name: "table_search",
+                  placeholder: "Search"
+                },
+                domProps: { value: _vm.search },
+                on: {
+                  keyup: _vm.searchit,
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(1)
+            ]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body table-responsive p-0" }, [
         _c("table", { staticClass: "table table-hover" }, [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "tbody",
@@ -44640,7 +44702,7 @@ var render = function() {
                         },
                         [
                           _c("div", { staticClass: "modal-content" }, [
-                            _vm._m(2, true),
+                            _vm._m(3, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "modal-body" }, [
                               _c(
@@ -44878,7 +44940,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -45133,47 +45195,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h3", { staticClass: "card-title" }, [
-        _vm._v("Users | "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default",
-            attrs: { "data-toggle": "modal", "data-target": "#addNewUser" }
-          },
-          [_vm._v("Add new "), _c("i", { staticClass: "fas fa-user-plus" })]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools d-flex" }, [
-        _c("i", { staticClass: "fas fa-sync-alt p-2" }),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-group-sm",
-            staticStyle: { width: "150px" }
-          },
-          [
-            _c("input", {
-              staticClass: "form-control float-right",
-              attrs: {
-                type: "text",
-                name: "table_search",
-                placeholder: "Search"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-default", attrs: { type: "submit" } },
-                [_c("i", { staticClass: "fas fa-search" })]
-              )
-            ])
-          ]
-        )
+    return _c("h3", { staticClass: "card-title" }, [
+      _vm._v("Users | "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { "data-toggle": "modal", "data-target": "#addNewUser" }
+        },
+        [_vm._v("Add new "), _c("i", { staticClass: "fas fa-user-plus" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c("button", { staticClass: "btn btn-default" }, [
+        _c("i", { staticClass: "fas fa-search" })
       ])
     ])
   },
@@ -60290,6 +60330,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.fire = new vue__WEBPACK_IMPORTED_MODULE_3___default.a();
 /**
  * vue-select
  */

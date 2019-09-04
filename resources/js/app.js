@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.fire = new Vue();
+
 /**
  * vue-select
  */

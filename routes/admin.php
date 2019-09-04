@@ -7,6 +7,7 @@ Route::prefix('admin')->group(function () {
     Route::post('users', 'Admin\UserManagementController@create')->name('admin.users.create');
     Route::put('users/{userID}', 'Admin\UserManagementController@edit')->name('admin.users.edit');
     Route::delete('users/{userID}', 'Admin\UserManagementController@delete')->name('admin.users.delete');
+    Route::get('findUser', 'Admin\UserManagementController@search')->name('admin.users.search');
     Route::get('roles', 'Admin\RoleController@roles')->name('admin.roles');
     Route::get('permissions', 'Admin\PermissionController@permissions')->name('admin.permissions');
 });
