@@ -20,4 +20,39 @@ class PermissionController extends Controller
     {
         return PermissionResource::collection($this->permission->all());
     }
+
+    public function create(Request $request)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $permission = $this->permission->create([
+            'name'=> $request->name
+        ]);
+
+        return response(['message'=>'Permission Created', 'user' => $permission]);
+    }
+
+    public function edit(Request $request, $permissionID)
+    {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $permission = $this->permission->findOrFail($permissionID);
+
+        $input = $request->only(['name']); //Retreive the name fields
+
+        $permission->fill($input)->save();
+
+        return response(['message'=>'Permission Updated', 'role' => $permission]);
+    }
+
+    public function delete($permissionID)
+    {
+        $this->permission->where('id', $permissionID)->delete();
+
+        return response(['message'=>'Permission Deleted']);
+    }
 }

@@ -6,15 +6,19 @@ use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class UserManagementController extends Controller
 {
+    private $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
     public function users()
     {
-        return UserResource::collection(User::orderBy('id', 'desc')->paginate(10));
+        return UserResource::collection($this->user->orderBy('id', 'desc')->paginate(10));
     }
 
     public function create(Request $request)
@@ -26,7 +30,7 @@ class UserManagementController extends Controller
             'password_confirmation' => 'required|same:password',
         ]);
 
-        $user= User::create([
+        $user= $this->user->create([
             'name'=> $request->name,
             'email'=> $request->email,
             'password'=> bcrypt($request->password)
@@ -39,21 +43,13 @@ class UserManagementController extends Controller
         $roles = $request['role']; //Retrieving the roles field
         //Checking if a role was selected
         if (isset($roles)) {
-
-            foreach ($roles as $role) {
-                $role_r = Role::where('id', '=', $role)->firstOrFail();
-                $user->assignRole($role_r); //Assigning role to user
-            }
+            $user->assignRole(collect($roles)->pluck('id')->toArray());
         }
 
         $permissions = $request['permission']; //Retrieving the permission field
         //Checking if a permission was selected
         if (isset($permissions)) {
-
-            foreach ($permissions as $permission) {
-                $permission_p = Permission::where('id', '=', $permission)->firstOrFail();
-                $user->givePermissionTo($permission_p);
-            }
+            $user->givePermissionTo(collect($permissions)->pluck('id')->toArray());
         }
 
         return response(['message'=>'User Created', 'user'=>$user]);
@@ -76,21 +72,13 @@ class UserManagementController extends Controller
         $roles = $request['role']; //Retrieving the roles field
         //Checking if a role was selected
         if (isset($roles)) {
-
-            foreach ($roles as $role) {
-                $role_r = Role::where('id', '=', $role)->firstOrFail();
-                $user->syncRoles($role_r); //Assigning role to user
-            }
+            $user->syncRoles(collect($roles)->pluck('id')->toArray());
         }
 
         $permissions = $request['permission']; //Retrieving the permission field
         //Checking if a permission was selected
         if (isset($permissions)) {
-
-            foreach ($permissions as $permission) {
-                $permission_p = Permission::where('id', '=', $permission)->firstOrFail();
-                $user->syncPermissions($permission_p);
-            }
+            $user->syncPermissions(collect($permissions)->pluck('id')->toArray());
         }
 
         return response(['message'=>'User Updated', 'user'=>$user]);
@@ -100,7 +88,7 @@ class UserManagementController extends Controller
     {
         User::where('id', $userID)->delete();
 
-        return response(['message'=>'User Updated']);
+        return response(['message'=>'User Deleted']);
     }
 
     public function search()

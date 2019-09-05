@@ -253,7 +253,15 @@
             },
             updateUser(id) {
                 this.editUser.put('admin/users/' + id)
-                    .then()
+                    .then(() => {
+                        this.loadUsers();
+                        $('#editUser'+id).modal('toggle');
+                        toast.fire({
+                            type: 'success',
+                            title: 'Your user was successfully updated!'
+                        })
+                        this.editUser.reset();
+                    })
                     .catch(() => {
                         toast.fire({
                             type: 'error',

@@ -2165,11 +2165,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       permissions: [],
       permissionForm: new Form({
+        name: ''
+      }),
+      editPermissionForm: new Form({
         name: ''
       })
     };
@@ -2181,6 +2210,73 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('admin/permissions').then(function (response) {
         _this.permissions = response.data.data;
       })["catch"]();
+    },
+    addPermission: function addPermission() {
+      var _this2 = this;
+
+      this.permissionForm.post('admin/permissions').then(function () {
+        toast.fire({
+          type: 'success',
+          text: 'Add permission successfully'
+        });
+        $('#addNewPermission').modal('toggle');
+
+        _this2.loadPermissions();
+
+        _this2.permissionForm.reset();
+      })["catch"](function () {
+        toast.fire({
+          type: 'error',
+          title: 'There was something wrong.'
+        });
+      });
+    },
+    editPermission: function editPermission(permission) {
+      this.editPermissionForm.fill(permission);
+    },
+    updatePermission: function updatePermission(id) {
+      var _this3 = this;
+
+      this.editPermissionForm.put('admin/permissions/' + id).then(function () {
+        _this3.loadPermissions();
+
+        $('#editPermission' + id).modal('toggle');
+        toast.fire({
+          type: 'success',
+          title: 'Your permission was successfully updated!'
+        });
+
+        _this3.editPermissionForm.reset();
+      })["catch"](function () {
+        toast.fire({
+          type: 'error',
+          title: 'There was something wrong.'
+        });
+      });
+    },
+    deletePermission: function deletePermission(id) {
+      var _this4 = this;
+
+      swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonClass: 'cancel-btn-class'
+      }).then(function (result) {
+        if (result.value) {
+          // send request to server
+          _this4.editPermissionForm["delete"]('admin/permissions/' + id).then(function () {
+            swal.fire('Deleted!', 'Your permission has been deleted.', 'success'); //helper.$emit('AfterAction');
+
+            _this4.loadPermissions();
+          })["catch"](function () {
+            swal("Failed!", "There was something wronge.", "warning");
+          });
+        }
+      });
     }
   },
   created: function created() {
@@ -2287,6 +2383,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2298,7 +2435,11 @@ __webpack_require__.r(__webpack_exports__);
       permissions: [],
       roleForm: new Form({
         name: '',
-        permission: ''
+        permission: []
+      }),
+      editRole: new Form({
+        name: '',
+        permission: []
       })
     };
   },
@@ -2324,6 +2465,73 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('admin/permissions').then(function (response) {
         _this2.permissions = response.data.data;
       })["catch"]();
+    },
+    addRole: function addRole() {
+      var _this3 = this;
+
+      this.roleForm.post('admin/roles').then(function () {
+        toast.fire({
+          type: 'success',
+          text: 'Add role successfully'
+        });
+        $('#addNewRole').modal('toggle');
+
+        _this3.loadRoles();
+
+        _this3.roleForm.reset();
+      })["catch"](function () {
+        toast.fire({
+          type: 'error',
+          title: 'There was something wrong.'
+        });
+      });
+    },
+    fillRoleDetails: function fillRoleDetails(role) {
+      this.editRole.fill(role);
+    },
+    updateRole: function updateRole(id) {
+      var _this4 = this;
+
+      this.editRole.put('admin/roles/' + id).then(function () {
+        _this4.loadRoles();
+
+        $('#editRole' + id).modal('toggle');
+        toast.fire({
+          type: 'success',
+          title: 'Your role was successfully updated!'
+        });
+
+        _this4.editRole.reset();
+      })["catch"](function () {
+        toast.fire({
+          type: 'error',
+          title: 'There was something wrong.'
+        });
+      });
+    },
+    deleteRole: function deleteRole(id) {
+      var _this5 = this;
+
+      swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonClass: 'cancel-btn-class'
+      }).then(function (result) {
+        if (result.value) {
+          // send request to server
+          _this5.editRole["delete"]('admin/roles/' + id).then(function () {
+            swal.fire('Deleted!', 'Your role has been deleted.', 'success'); //helper.$emit('AfterAction');
+
+            _this5.loadRoles();
+          })["catch"](function () {
+            swal("Failed!", "There was something wronge.", "warning");
+          });
+        }
+      });
     }
   },
   created: function created() {
@@ -2600,7 +2808,19 @@ __webpack_require__.r(__webpack_exports__);
       this.editUser.fill(user); //this.editUser = Object.assign({}, user);
     },
     updateUser: function updateUser(id) {
-      this.editUser.put('admin/users/' + id).then()["catch"](function () {
+      var _this4 = this;
+
+      this.editUser.put('admin/users/' + id).then(function () {
+        _this4.loadUsers();
+
+        $('#editUser' + id).modal('toggle');
+        toast.fire({
+          type: 'success',
+          title: 'Your user was successfully updated!'
+        });
+
+        _this4.editUser.reset();
+      })["catch"](function () {
         toast.fire({
           type: 'error',
           title: 'There was something wrong.'
@@ -2608,7 +2828,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteUser: function deleteUser(id) {
-      var _this4 = this;
+      var _this5 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -2621,10 +2841,10 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           // send request to server
-          _this4.editUser["delete"]('admin/users/' + id).then(function () {
+          _this5.editUser["delete"]('admin/users/' + id).then(function () {
             swal.fire('Deleted!', 'Your user has been deleted.', 'success'); //helper.$emit('AfterAction');
 
-            _this4.loadUsers();
+            _this5.loadUsers();
           })["catch"](function () {
             swal("Failed!", "There was something wronge.", "warning");
           });
@@ -2632,17 +2852,17 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     loadRoles: function loadRoles() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get('admin/roles').then(function (response) {
-        _this5.roles = response.data.data;
+        _this6.roles = response.data.data;
       })["catch"]();
     },
     loadPermissions: function loadPermissions() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get('admin/permissions').then(function (response) {
-        _this6.permissions = response.data.data;
+        _this7.permissions = response.data.data;
       })["catch"]();
     },
     searchit: function searchit() {
@@ -2653,12 +2873,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    var _this7 = this;
+    var _this8 = this;
 
     fire.$on('searching', function () {
-      var query = _this7.search;
+      var query = _this8.search;
       axios.get('admin/findUser?q=' + query).then(function (response) {
-        _this7.users = response.data;
+        _this8.users = response.data;
       })["catch"]();
     });
     this.loadUsers();
@@ -44129,7 +44349,143 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(permission.name))]),
                 _vm._v(" "),
-                _vm._m(2, true)
+                _c("td", [
+                  _c("i", {
+                    staticClass: "fas fa-user-edit edit",
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#editPermission" + permission.id
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.editPermission(permission)
+                      }
+                    }
+                  }),
+                  _vm._v("  | \n                        "),
+                  _c("i", {
+                    staticClass: "fas fa-user-minus delete",
+                    on: {
+                      click: function($event) {
+                        return _vm.deletePermission(permission.id)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "editPermission" + permission.id,
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-labelledby": "exampleModalLabel2",
+                        "aria-hidden": "true"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog",
+                          attrs: { role: "document" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-body" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.editPermissionForm.name,
+                                        expression: "editPermissionForm.name"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.editPermissionForm.errors.has(
+                                        "name"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "name",
+                                      placeholder: "Name"
+                                    },
+                                    domProps: {
+                                      value: _vm.editPermissionForm.name
+                                    },
+                                    on: {
+                                      keydown: function($event) {
+                                        return _vm.editPermissionForm.onKeydown(
+                                          $event
+                                        )
+                                      },
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.editPermissionForm,
+                                          "name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.editPermissionForm,
+                                      field: "name"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-footer" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal"
+                                  }
+                                },
+                                [_vm._v("Cancel")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.updatePermission(permission.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Save Changes")]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ])
             }),
             0
@@ -44138,7 +44494,100 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(3)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "addNewPermission",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel2",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.permissionForm.name,
+                          expression: "permissionForm.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.permissionForm.errors.has("name")
+                      },
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "Name"
+                      },
+                      domProps: { value: _vm.permissionForm.name },
+                      on: {
+                        keydown: function($event) {
+                          return _vm.permissionForm.onKeydown($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.permissionForm,
+                            "name",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.permissionForm, field: "name" }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button" },
+                    on: { click: _vm.addPermission }
+                  },
+                  [_vm._v("Add Permission")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -44153,7 +44602,10 @@ var staticRenderFns = [
           "button",
           {
             staticClass: "btn btn-default",
-            attrs: { "data-toggle": "modal", "data-target": "#addNewUser" }
+            attrs: {
+              "data-toggle": "modal",
+              "data-target": "#addNewPermission"
+            }
           },
           [_vm._v("Add new "), _c("i", { staticClass: "nav-icon fas fa-key" })]
         )
@@ -44208,92 +44660,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("i", { staticClass: "fas fa-user-edit edit" }),
-      _vm._v("  | \n                        "),
-      _c("i", { staticClass: "fas fa-user-minus delete" })
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("New Permission")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "addNewUser",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel2",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "exampleModalLabel2" }
-                  },
-                  [_vm._v("New Permission")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text", name: "name", placeholder: "Name" }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Cancel")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-success", attrs: { type: "button" } },
-                  [_vm._v("Add Permission")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel2" } },
+        [_vm._v("New Permission")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -44335,7 +44742,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "td",
-                  _vm._l(role.permissions, function(pv) {
+                  _vm._l(role.permission, function(pv) {
                     return _c(
                       "label",
                       { staticClass: "badge badge-success mr-1" },
@@ -44345,7 +44752,169 @@ var render = function() {
                   0
                 ),
                 _vm._v(" "),
-                _vm._m(2, true)
+                _c("td", [
+                  _c("i", {
+                    staticClass: "fas fa-user-edit edit",
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#editRole" + role.id
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.fillRoleDetails(role)
+                      }
+                    }
+                  }),
+                  _vm._v("  | \n                        "),
+                  _c("i", {
+                    staticClass: "fas fa-user-minus delete",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteRole(role.id)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "editRole" + role.id,
+                        tabindex: "-1",
+                        role: "dialog",
+                        "aria-labelledby": "exampleModalLabel",
+                        "aria-hidden": "true"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "modal-dialog",
+                          attrs: { role: "document" }
+                        },
+                        [
+                          _c("div", { staticClass: "modal-content" }, [
+                            _vm._m(2, true),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-body" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.editRole.name,
+                                        expression: "editRole.name"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.editRole.errors.has(
+                                        "name"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "name",
+                                      placeholder: "Name"
+                                    },
+                                    domProps: { value: _vm.editRole.name },
+                                    on: {
+                                      keydown: function($event) {
+                                        return _vm.editRole.onKeydown($event)
+                                      },
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.editRole,
+                                          "name",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.editRole, field: "name" }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("multiselect", {
+                                    attrs: {
+                                      options: _vm.permissions,
+                                      label: "name",
+                                      "track-by": "id",
+                                      searchable: false,
+                                      multiple: true,
+                                      taggable: true,
+                                      "close-on-select": false,
+                                      "clear-on-select": false,
+                                      placeholder: "Select permission"
+                                    },
+                                    on: { tag: _vm.addTag },
+                                    model: {
+                                      value: _vm.editRole.permission,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.editRole,
+                                          "permission",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "editRole.permission"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "modal-footer" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger",
+                                  attrs: {
+                                    type: "button",
+                                    "data-dismiss": "modal"
+                                  }
+                                },
+                                [_vm._v("Cancel")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.updateRole(role.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Save changes")]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                ])
               ])
             }),
             0
@@ -44359,7 +44928,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "addNewUser",
+          id: "addNewRole",
           tabindex: "-1",
           role: "dialog",
           "aria-labelledby": "exampleModalLabel2",
@@ -44375,7 +44944,46 @@ var render = function() {
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _vm._m(4),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.roleForm.name,
+                          expression: "roleForm.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: { "is-invalid": _vm.roleForm.errors.has("name") },
+                      attrs: {
+                        type: "text",
+                        name: "name",
+                        placeholder: "Name"
+                      },
+                      domProps: { value: _vm.roleForm.name },
+                      on: {
+                        keydown: function($event) {
+                          return _vm.roleForm.onKeydown($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.roleForm, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.roleForm, field: "name" }
+                    })
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -44407,7 +45015,26 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button" },
+                    on: { click: _vm.addRole }
+                  },
+                  [_vm._v("Add Role")]
+                )
+              ])
             ])
           ]
         )
@@ -44427,7 +45054,7 @@ var staticRenderFns = [
           "button",
           {
             staticClass: "btn btn-default",
-            attrs: { "data-toggle": "modal", "data-target": "#addNewUser" }
+            attrs: { "data-toggle": "modal", "data-target": "#addNewRole" }
           },
           [_vm._v("Add new "), _c("i", { staticClass: "nav-icon fas fa-key" })]
         )
@@ -44484,10 +45111,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("i", { staticClass: "fas fa-user-edit edit" }),
-      _vm._v("  | \n                        "),
-      _c("i", { staticClass: "fas fa-user-minus delete" })
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Edit Role")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
@@ -44512,38 +45154,6 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "name", placeholder: "Name" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cancel")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "button" } },
-        [_vm._v("Add Role")]
       )
     ])
   }
