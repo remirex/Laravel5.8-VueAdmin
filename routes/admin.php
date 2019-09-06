@@ -1,6 +1,5 @@
 <?php
 
-
 Route::prefix('admin')->group(function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
     // Users

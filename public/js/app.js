@@ -2083,7 +2083,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      users: {}
+    };
+  },
+  methods: {
+    loadUsers: function loadUsers() {
+      var _this = this;
+
+      axios.get('admin/users').then(function (response) {
+        _this.users = response.data.data;
+      })["catch"]();
+    }
+  },
+  created: function created() {
+    this.loadUsers();
+  },
+  computed: {
+    resultCount: function resultCount() {
+      return this.users.length;
+    }
+  },
   name: "Dashboard"
 });
 
@@ -44309,9 +44347,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+      _c("div", { staticClass: "info-box mb-3" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "info-box-content" }, [
+          _c("span", { staticClass: "info-box-text" }, [_vm._v("New Members")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "info-box-number" }, [
+            _vm._v(_vm._s(_vm.resultCount))
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
+      _c("i", { staticClass: "fas fa-users" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -44388,7 +44449,7 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "modal-dialog",
+                          staticClass: "modal-dialog modal-dialog-centered",
                           attrs: { role: "document" }
                         },
                         [
@@ -44509,7 +44570,10 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(3),
@@ -44791,7 +44855,7 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "modal-dialog",
+                          staticClass: "modal-dialog modal-dialog-centered",
                           attrs: { role: "document" }
                         },
                         [
@@ -44938,7 +45002,10 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(3),
@@ -45307,7 +45374,7 @@ var render = function() {
                       _c(
                         "div",
                         {
-                          staticClass: "modal-dialog",
+                          staticClass: "modal-dialog modal-dialog-centered",
                           attrs: { role: "document" }
                         },
                         [
@@ -45547,7 +45614,10 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(4),

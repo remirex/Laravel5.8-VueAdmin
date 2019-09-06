@@ -33,7 +33,7 @@
                             <i class="fas fa-user-minus delete" @click="deletePermission(permission.id)"></i>
                             <!-- Modal edit role -->
                             <div class="modal fade" :id="'editPermission'+permission.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">New Permission</h5>
@@ -66,7 +66,7 @@
 
         <!-- Modal add new role -->
         <div class="modal fade" id="addNewPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel2">New Permission</h5>

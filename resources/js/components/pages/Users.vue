@@ -39,7 +39,7 @@
                             <i class="fas fa-user-minus delete" @click="deleteUser(user.id)"></i>
                             <!-- Modal edit user -->
                             <div class="modal fade" :id="'editUser'+user.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
@@ -110,7 +110,7 @@
 
         <!-- Modal add new user -->
         <div class="modal fade" id="addNewUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel2">New User</h5>
