@@ -82,6 +82,7 @@ const router = new VueRouter({
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('account', require('./components/auth/Account').default);
+Vue.component('account-form', require('./components/auth/AccountForm').default);
 Vue.component('admin', require('./components/Admin').default);
 Vue.component('dashboard', require('./components/pages/Dashboard').default);
 Vue.component('users', require('./components/pages/Users').default);

@@ -1,4 +1,4 @@
 @extends('layouts.account')
 @section('content')
-    <account></account>
+    <account-form></account-form>
 @endsection()

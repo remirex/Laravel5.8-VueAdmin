@@ -17,7 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div id="app" class="account-form">
     @yield('content')
 </div>
 <!-- Scripts -->
