@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('auth.account');
-});
+})->name('account-request');
 
 Auth::routes();
 

@@ -1873,6 +1873,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    logout: function logout() {
+      axios.post('logout').then(function () {
+        window.location.href = '/';
+      })["catch"](function () {
+        toast.fire({
+          type: 'error',
+          title: 'There was something wrong.'
+        });
+      });
+    }
+  },
   name: "Admin"
 });
 
@@ -43876,7 +43888,23 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(4),
                 _vm._v(" "),
-                _vm._m(5)
+                _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { href: "#" },
+                      on: { click: _vm.logout }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-sign-out-alt text-danger"
+                      }),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "text" }, [_vm._v("Logout")])
+                    ]
+                  )
+                ])
               ]
             )
           ])
@@ -43885,14 +43913,14 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "content-wrapper" }, [
-      _vm._m(6),
+      _vm._m(5),
       _vm._v(" "),
       _c("section", { staticClass: "content" }, [
         _c("div", { staticClass: "container-fluid" }, [_c("router-view")], 1)
       ])
     ]),
     _vm._v(" "),
-    _vm._m(7)
+    _vm._m(6)
   ])
 }
 var staticRenderFns = [
@@ -44076,18 +44104,6 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-user" }),
         _vm._v(" "),
         _c("p", [_vm._v("Profile")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item" }, [
-      _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-sign-out-alt text-danger" }),
-        _vm._v(" "),
-        _c("p", { staticClass: "text" }, [_vm._v("Important")])
       ])
     ])
   },

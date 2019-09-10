@@ -114,9 +114,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link" @click="logout">
                                 <i class="fas fa-sign-out-alt text-danger"></i>
-                                <p class="text">Important</p>
+                                <p class="text">Logout</p>
                             </a>
                         </li>
                     </ul>
@@ -158,6 +158,20 @@
 
 <script>
     export default {
+        methods: {
+            logout() {
+                axios.post('logout')
+                    .then(() => {
+                        window.location.href = '/'
+                    })
+                    .catch(() => {
+                        toast.fire({
+                            type: 'error',
+                            title: 'There was something wrong.'
+                        })
+                    })
+            }
+        },
         name: "Admin"
     }
 </script>
