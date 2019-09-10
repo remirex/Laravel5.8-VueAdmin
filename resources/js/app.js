@@ -61,6 +61,7 @@ let routes = [
     { path: '/users', component: require('./components/pages/Users').default },
     { path: '/role', component: require('./components/pages/Roles').default },
     { path: '/permission', component: require('./components/pages/Permissions').default },
+    { path: '/password/reset/:token', component: require('./components/auth/passwords/Reset') },
 ]
 
 // Create the router instance and pass the `routes` option
@@ -83,6 +84,7 @@ const router = new VueRouter({
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('account', require('./components/auth/Account').default);
 Vue.component('account-form', require('./components/auth/AccountForm').default);
+Vue.component('reset-password', require('./components/auth/passwords/Reset').default);
 Vue.component('admin', require('./components/Admin').default);
 Vue.component('dashboard', require('./components/pages/Dashboard').default);
 Vue.component('users', require('./components/pages/Users').default);

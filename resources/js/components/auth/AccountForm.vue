@@ -14,7 +14,7 @@
                        :class="{ 'is-invalid': login.errors.has('password') }" @keydown="login.onKeydown($event)">
                 <has-error :form="login" field="password"></has-error>
             </label>
-            <p class="forgot-pass">Forgot password?</p>
+            <p class="forgot-pass" data-toggle="modal" data-target="#forgotPassword">Forgot password?</p>
             <button type="button" class="submit" @click="userLogin">Sign In</button>
             <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
         </div>
@@ -61,6 +61,30 @@
                 <button type="button" class="fb-btn">Join with <span>facebook</span></button>
             </div>
         </div>
+
+        <!-- Modal  Forgot Password -->
+        <div class="modal fade" id="forgotPassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div><h2>Forgot your password?</h2></div>
+                        <div>
+                            <p>Enter the email address associated with your account. We will email you a link
+                                with instructions on how to reset your password.</p>
+                        </div>
+                        <div>
+                            <label>
+                                <span>Email</span>
+                                <input type="email" name="email" class="form-control" v-model="form.email"
+                                       :class="{ 'is-invalid': form.errors.has('email') }" @keydown="form.onKeydown($event)">
+                                <has-error :form="form" field="email"></has-error>
+                            </label>
+                            <button type="button" class="submit" @click="sendEmailReset">Send Password Reset Link</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -77,6 +101,9 @@
               login: new Form({
                   email: '',
                   password: ''
+              }),
+              form: new Form ({
+                  email: ''
               })
           }
         },
@@ -101,6 +128,23 @@
                         } else {
                             window.location.href = '/home'
                         }
+                    })
+                    .catch(() => {
+                        toast.fire({
+                            type: 'error',
+                            title: 'There was something wrong.'
+                        })
+                    })
+            },
+            sendEmailReset () {
+                this.form.post('/password/email')
+                    .then(() => {
+                        toast.fire({
+                            type: 'success',
+                            title: 'We have sent an email. Follow instructions in the email to reset your password.'
+                        })
+                        $('#forgotPassword').modal('toggle');
+                        this.form.reset();
                     })
                     .catch(() => {
                         toast.fire({
