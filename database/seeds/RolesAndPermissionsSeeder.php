@@ -22,6 +22,8 @@ class RolesAndPermissionsSeeder extends Seeder
         $admin = factory(\App\User::class)->create([
             'name' => 'Admin Admin',
             'email' => 'admin@example.com',
+            'status' => 'Active',
+            'activation_token' => ''
         ]);
 
         $admin->assignRole('admin');
@@ -32,6 +34,8 @@ class RolesAndPermissionsSeeder extends Seeder
         $user = factory(\App\User::class)->create([
             'name' => 'John Doe',
             'email' => 'john@example.com',
+            'status' => 'Active',
+            'activation_token' => ''
         ]);
 
         $user->assignRole('guest');

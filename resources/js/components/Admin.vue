@@ -14,7 +14,7 @@
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fas fa-bell fa-2x"></i>
+                        <i class="fas fa-bell"></i>
                         <span class="badge badge-danger navbar-badge">15</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -36,6 +36,26 @@
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link images" data-toggle="dropdown" href="#">
+                        <img src="/img/user2.jpg" class="img-circle elevation-2" alt="User Image" width="31">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">Accounts</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user mr-3"></i> Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-wrench mr-3"></i> Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" @click="logout">
+                            <i class="fas fa-sign-out-alt text-danger mr-3"></i> Logout
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -107,7 +127,7 @@
                         </li>
 
                         <li class="nav-header">LABELS</li>
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user"></i>
                                 <p>Profile</p>
@@ -118,7 +138,7 @@
                                 <i class="fas fa-sign-out-alt text-danger"></i>
                                 <p class="text">Logout</p>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

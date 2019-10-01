@@ -8,6 +8,7 @@ Route::prefix('admin')->group(function () {
     Route::put('users/{userID}', 'Admin\UserManagementController@edit')->name('admin.users.edit');
     Route::delete('users/{userID}', 'Admin\UserManagementController@delete')->name('admin.users.delete');
     Route::get('findUser', 'Admin\UserManagementController@search')->name('admin.users.search');
+    Route::put('users/change-status/{userID}', 'Admin\UserManagementController@changeUserStatus')->name('admin.change.status');
     // Roles
     Route::get('roles', 'Admin\RoleController@roles')->name('admin.roles');
     Route::post('roles', 'Admin\RoleController@create')->name('admin.roles.create');

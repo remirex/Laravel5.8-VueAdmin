@@ -22,8 +22,11 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Registered</th>
                         <th>Role</th>
                         <th>Permission</th>
+                        <th>Status</th>
+                        <th>Change Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -32,8 +35,19 @@
                         <td>{{user.id}}</td>
                         <td>{{user.name}}</td>
                         <td>{{user.email}}</td>
+                        <td>{{user.created_at | myDate}}</td>
                         <td><label class="badge badge-success mr-1" v-for="rv in user.role">{{rv.name}}</label></td>
                         <td><label class="badge badge-success mr-1" v-for="pv in user.permission">{{pv.name}}</label></td>
+                        <td v-if="user.status === 'Active'"><label class="badge badge-success">{{user.status}}</label></td>
+                        <td v-else-if="user.status === 'Pending Approval'"><label class="badge badge-warning">{{user.status}}</label></td>
+                        <td v-else><label class="badge badge-danger">{{user.status}}</label></td>
+                        <td class="d-flex justify-content-center align-items-center">
+                            <select class="form-control status" v-model="change.status" @change="changeStatus(user.id)">
+                                <option disabled value="">Change status</option>
+                                <option value="Active">Active</option>
+                                <option value="Banned">Banned</option>
+                            </select>
+                        </td>
                         <td>
                             <i class="fas fa-user-edit edit" data-toggle="modal" v-bind:data-target="'#editUser'+user.id" @click="fillUserDetails(user)"></i>&nbsp; |&nbsp;
                             <i class="fas fa-user-minus delete" @click="deleteUser(user.id)"></i>
@@ -203,6 +217,9 @@
                   email: '',
                   role: [],
                   permission: []
+              }),
+              change: new Form({
+                  status: ''
               })
           }
         },
@@ -268,6 +285,18 @@
                             title: 'There was something wrong.'
                         })
                     })
+            },
+            changeStatus(id) {
+                this.change.put('admin/users/change-status/' + id)
+                    .then(() => {
+                        this.change.status = '';
+                        toast.fire({
+                            type: 'success',
+                            text: 'User status successfully updated'
+                        });
+                        this.loadUsers();
+                    })
+                    .catch()
             },
             deleteUser(id) {
                 swal.fire({

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Notifications\AccountActivation;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -73,10 +74,30 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => 'Inactive',
+            'activation_token' => str_random(100)
         ]);
 
         $user->assignRole('guest'); //Assigning role to user
 
+        //Send activation email
+        $user->notify(new AccountActivation($user));
+
         return $user;
+    }
+
+    public function activate($token)
+    {
+        $user = User::where('activation_token', $token)->first();
+
+        if (!$user) {
+            return redirect('/');
+        }
+
+        $user->status = 'Active';
+        $user->activation_token = '';
+        $user->save();
+
+        return redirect('/');
     }
 }

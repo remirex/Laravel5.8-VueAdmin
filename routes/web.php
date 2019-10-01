@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/account/login', 'Front\AuthController@userLogin')->name('user-login');
+Route::post('/account/register', 'Front\AuthController@userRegister')->name('user-register');
+Route::get('/register/activate/{token}', 'Front\AuthController@activationAccount')->name('activation-account');

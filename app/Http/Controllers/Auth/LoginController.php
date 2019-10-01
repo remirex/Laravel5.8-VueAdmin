@@ -29,12 +29,16 @@ class LoginController extends Controller
     {
         // User role
         $role = Auth::user()->hasRole('admin');
+        // Active user
+        $userStatus = Auth::user()->status;
 
         // Check user role
-        if ($role) {
+        if ($role and $userStatus == 'Active') {
             return 'admin';
-        } else {
+        } elseif ($userStatus == 'Active') {
             return 'home';
+        } else {
+            return 'error';
         }
     }
 

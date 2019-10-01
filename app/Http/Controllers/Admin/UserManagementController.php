@@ -104,4 +104,24 @@ class UserManagementController extends Controller
 
         return $users;
     }
+
+    public function changeUserStatus(Request $request, $id)
+    {
+        $user = $this->user->find($id);
+
+        $status = $request['status'];
+
+        if ($status == 'Active') {
+            $user->status = 'Active';
+            $user->save();
+
+            // Send Activation Notification
+
+        } elseif ($status == 'Banned') {
+            $user->status = 'Banned';
+            $user->save();
+        }
+
+        return $user;
+    }
 }

@@ -88,7 +88,7 @@
                     .catch()
             },
             userLogin() {
-                this.login.post('/login')
+                this.login.post('/account/login')
                     .then(response => {
                         if(response.data === 'admin'){
                             window.location.href = '/dashboard'

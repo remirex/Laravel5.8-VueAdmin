@@ -109,9 +109,13 @@
         },
         methods: {
             createAccount() {
-                this.create.post('/register')
+                this.create.post('account/register')
                     .then(() => {
-                        window.location.href = '/home'
+                        toast.fire({
+                            type: 'success',
+                            title: 'We have sent an email. Follow instructions in the email to activate your account.'
+                        });
+                        this.create.reset();
                     })
                     .catch(() => {
                         toast.fire({
@@ -121,12 +125,17 @@
                     })
             },
             userLogin() {
-                this.login.post('/login')
+                this.login.post('/account/login')
                     .then(response => {
                         if(response.data === 'admin'){
                             window.location.href = '/dashboard'
-                        } else {
+                        } else if (response.data === 'home') {
                             window.location.href = '/home'
+                        } else if (response.data === 'error') {
+                            toast.fire({
+                                type: 'error',
+                                title: 'There was something wrong. Credential does not match!'
+                            })
                         }
                     })
                     .catch(() => {
@@ -142,7 +151,7 @@
                         toast.fire({
                             type: 'success',
                             title: 'We have sent an email. Follow instructions in the email to reset your password.'
-                        })
+                        });
                         $('#forgotPassword').modal('toggle');
                         this.form.reset();
                     })

@@ -10,6 +10,12 @@ window.Vue = require('vue');
 
 window.fire = new Vue();
 
+import moment from 'moment';
+
+Vue.filter('myDate',function(created){
+    return moment(created).format('MMMM Do YYYY');
+});
+
 /**
  * vue-select
  */
