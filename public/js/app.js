@@ -61737,10 +61737,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fas fa-user mr-3" }),
-      _vm._v(" Profile\n                    ")
-    ])
+    return _c(
+      "a",
+      { staticClass: "dropdown-item", attrs: { href: "/dashboard" } },
+      [
+        _c("i", { staticClass: "fas fa-user mr-3" }),
+        _vm._v(" Profile\n                    ")
+      ]
+    )
   },
   function() {
     var _vm = this

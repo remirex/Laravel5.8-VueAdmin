@@ -33,7 +33,9 @@ class UserManagementController extends Controller
         $user= $this->user->create([
             'name'=> $request->name,
             'email'=> $request->email,
-            'password'=> bcrypt($request->password)
+            'password'=> bcrypt($request->password),
+            'status' => 'Active',
+            'activation_token' => ''
         ]);
 
         if (!isset($roles)) {
