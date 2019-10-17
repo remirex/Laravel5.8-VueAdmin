@@ -23,7 +23,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'name' => 'Admin Admin',
             'email' => 'admin@example.com',
             'status' => 'Active',
-            'activation_token' => ''
+            'activation_token' => '',
+            'provider' => '',
+            'provider_id' => ''
         ]);
 
         $admin->assignRole('admin');
@@ -35,7 +37,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'name' => 'John Doe',
             'email' => 'john@example.com',
             'status' => 'Active',
-            'activation_token' => ''
+            'activation_token' => '',
+            'provider' => '',
+            'provider_id' => ''
         ]);
 
         $user->assignRole('guest');

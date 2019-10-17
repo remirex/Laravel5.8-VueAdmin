@@ -2214,6 +2214,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    gitHub: function gitHub() {
+      window.location.href = '/auth/redirect/github';
+    },
     createAccount: function createAccount() {
       var _this = this;
 
@@ -62740,7 +62743,15 @@ var render = function() {
         [_vm._v("Sign In")]
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "button",
+        {
+          staticClass: "fb-btn",
+          attrs: { type: "button" },
+          on: { click: _vm.gitHub }
+        },
+        [_vm._v("Join with "), _vm._m(0)]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "sub-cont" }, [
@@ -62896,7 +62907,15 @@ var render = function() {
           [_vm._v("Sign Up")]
         ),
         _vm._v(" "),
-        _vm._m(2)
+        _c(
+          "button",
+          {
+            staticClass: "fb-btn",
+            attrs: { type: "button" },
+            on: { click: _vm.gitHub }
+          },
+          [_vm._v("Join with "), _vm._m(2)]
+        )
       ])
     ]),
     _vm._v(" "),
@@ -62988,9 +63007,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "fb-btn", attrs: { type: "button" } }, [
-      _vm._v("Connect with "),
-      _c("span", [_vm._v("facebook")])
+    return _c("span", [
+      _c("i", { staticClass: "fab fa-github" }),
+      _vm._v(" github")
     ])
   },
   function() {
@@ -63027,9 +63046,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "fb-btn", attrs: { type: "button" } }, [
-      _vm._v("Join with "),
-      _c("span", [_vm._v("facebook")])
+    return _c("span", [
+      _c("i", { staticClass: "fab fa-github" }),
+      _vm._v(" github")
     ])
   },
   function() {

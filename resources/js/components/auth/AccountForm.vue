@@ -16,7 +16,7 @@
             </label>
             <p class="forgot-pass" data-toggle="modal" data-target="#forgotPassword">Forgot password?</p>
             <button type="button" class="submit" @click="userLogin">Sign In</button>
-            <button type="button" class="fb-btn">Connect with <span>facebook</span></button>
+            <button type="button" class="fb-btn" @click="gitHub">Join with <span><i class="fab fa-github"></i> github</span></button>
         </div>
         <div class="sub-cont">
             <div class="img">
@@ -58,7 +58,7 @@
                     <input type="password" name="password_confirmation" v-model="create.password_confirmation">
                 </label>
                 <button type="button" class="submit" @click="createAccount">Sign Up</button>
-                <button type="button" class="fb-btn">Join with <span>facebook</span></button>
+                <button type="button" class="fb-btn" @click="gitHub">Join with <span><i class="fab fa-github"></i> github</span></button>
             </div>
         </div>
 
@@ -108,6 +108,9 @@
           }
         },
         methods: {
+            gitHub() {
+              window.location.href = '/auth/redirect/github'
+            },
             createAccount() {
                 this.create.post('account/register')
                     .then(() => {
