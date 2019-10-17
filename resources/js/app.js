@@ -67,7 +67,8 @@ let routes = [
     { path: '/users', component: require('./components/pages/Users').default },
     { path: '/role', component: require('./components/pages/Roles').default },
     { path: '/permission', component: require('./components/pages/Permissions').default },
-    { path: '/password/reset/:token', component: require('./components/auth/passwords/Reset') },
+    { path: '/password/reset/:token', component: require('./components/auth/passwords/Reset').default },
+    { path: '/profile', component: require('./components/pages/Profile').default },
 ]
 
 // Create the router instance and pass the `routes` option
@@ -96,6 +97,7 @@ Vue.component('dashboard', require('./components/pages/Dashboard').default);
 Vue.component('users', require('./components/pages/Users').default);
 Vue.component('roles', require('./components/pages/Roles').default);
 Vue.component('permissions', require('./components/pages/Permissions').default);
+Vue.component('profile', require('./components/pages/Profile').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

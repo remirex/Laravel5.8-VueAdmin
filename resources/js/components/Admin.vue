@@ -45,9 +45,9 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">Accounts</span>
                         <div class="dropdown-divider"></div>
-                        <a href="/dashboard" class="dropdown-item">
+                        <router-link to="/profile" class="dropdown-item">
                             <i class="fas fa-user mr-3"></i> Profile
-                        </a>
+                        </router-link>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-wrench mr-3"></i> Settings

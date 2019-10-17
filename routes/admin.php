@@ -2,6 +2,8 @@
 
 Route::prefix('admin')->group(function () {
     Route::get('dashboard', 'Admin\AdminController@index')->name('admin.dashboard');
+    // Profile
+    Route::get('profile', 'Admin\AdminController@index')->name('admin.dashboard');
     // Users
     Route::get('users', 'Admin\UserManagementController@users')->name('admin.users');
     Route::post('users', 'Admin\UserManagementController@create')->name('admin.users.create');
