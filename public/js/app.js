@@ -63343,7 +63343,7 @@ var render = function() {
                           attrs: { role: "document" }
                         },
                         [
-                          _c("div", { staticClass: "modal-content" }, [
+                          _c("div", { staticClass: "modal-content border-0" }, [
                             _vm._m(2, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "modal-body" }, [
@@ -63420,7 +63420,7 @@ var render = function() {
                               _c(
                                 "button",
                                 {
-                                  staticClass: "btn btn-success",
+                                  staticClass: "btn btn-warning",
                                   attrs: { type: "button" },
                                   on: {
                                     click: function($event) {
@@ -63614,7 +63614,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header bg-warning-gradient" }, [
       _c("h5", { staticClass: "modal-title" }, [_vm._v("New Permission")]),
       _vm._v(" "),
       _c(
@@ -63635,7 +63635,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header bg-dark-gradient" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel2" } },
@@ -64517,7 +64517,7 @@ var render = function() {
                           attrs: { role: "document" }
                         },
                         [
-                          _c("div", { staticClass: "modal-content" }, [
+                          _c("div", { staticClass: "modal-content border-0" }, [
                             _vm._m(2, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "modal-body" }, [
@@ -64620,7 +64620,7 @@ var render = function() {
                               _c(
                                 "button",
                                 {
-                                  staticClass: "btn btn-success",
+                                  staticClass: "btn btn-warning",
                                   attrs: { type: "button" },
                                   on: {
                                     click: function($event) {
@@ -64836,7 +64836,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header bg-warning-gradient" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -64861,7 +64861,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header bg-dark-gradient" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel2" } },
@@ -64878,7 +64878,13 @@ var staticRenderFns = [
             "aria-label": "Close"
           }
         },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        [
+          _c(
+            "span",
+            { staticClass: "text-white", attrs: { "aria-hidden": "true" } },
+            [_vm._v("×")]
+          )
+        ]
       )
     ])
   }
@@ -65117,7 +65123,7 @@ var render = function() {
                           attrs: { role: "document" }
                         },
                         [
-                          _c("div", { staticClass: "modal-content" }, [
+                          _c("div", { staticClass: "modal-content border-0" }, [
                             _vm._m(3, true),
                             _vm._v(" "),
                             _c("div", { staticClass: "modal-body" }, [
@@ -65301,7 +65307,7 @@ var render = function() {
                               _c(
                                 "button",
                                 {
-                                  staticClass: "btn btn-success",
+                                  staticClass: "btn btn-warning",
                                   attrs: { type: "button" },
                                   on: {
                                     click: function($event) {
@@ -65358,7 +65364,7 @@ var render = function() {
             attrs: { role: "document" }
           },
           [
-            _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-content border-0" }, [
               _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -65666,7 +65672,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header bg-warning" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
@@ -65691,7 +65697,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
+    return _c("div", { staticClass: "modal-header bg-dark-gradient" }, [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel2" } },
@@ -65708,7 +65714,13 @@ var staticRenderFns = [
             "aria-label": "Close"
           }
         },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        [
+          _c(
+            "span",
+            { staticClass: "text-white", attrs: { "aria-hidden": "true" } },
+            [_vm._v("×")]
+          )
+        ]
       )
     ])
   }
@@ -81631,8 +81643,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/laravel5.8-VueAdmin/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/laravel5.8-VueAdmin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/VueAdmin/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/VueAdmin/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

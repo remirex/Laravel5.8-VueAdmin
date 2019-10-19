@@ -34,8 +34,8 @@
                             <!-- Modal edit role -->
                             <div class="modal fade" :id="'editPermission'+permission.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
+                                    <div class="modal-content border-0">
+                                        <div class="modal-header bg-warning-gradient">
                                             <h5 class="modal-title">New Permission</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-success" @click="updatePermission(permission.id)">Save Changes</button>
+                                            <button type="button" class="btn btn-warning" @click="updatePermission(permission.id)">Save Changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -68,10 +68,10 @@
         <div class="modal fade" id="addNewPermission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-dark-gradient">
                         <h5 class="modal-title" id="exampleModalLabel2">New Permission</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" class="text-white">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
